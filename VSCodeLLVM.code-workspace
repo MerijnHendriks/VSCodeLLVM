@@ -1,0 +1,95 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"llvm-vs-code-extensions.vscode-clangd",
+			"vadimcn.vscode-lldb"
+		]
+	},
+	"settings": {
+		"clangd.arguments": [
+			"-background-index",
+			"-compile-commands-dir=build/obj/debug"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "cmake-debug",
+				"type": "shell",
+				"command": "cmake --preset=debug"
+			},
+			{
+				"label": "cmake-release",
+				"type": "shell",
+				"command": "cmake --preset=release"
+			},
+			{
+				"label": "ninja-debug",
+				"type": "shell",
+				"command": "ninja -v",
+				"options": {
+					"cwd": "${workspaceRoot}/build/obj/debug"
+				}
+			},
+			{
+				"label": "ninja-release",
+				"type": "shell",
+				"command": "ninja -v",
+				"options": {
+					"cwd": "${workspaceRoot}/build/obj/release"
+				}
+			},
+			{
+				"label": "Debug",
+				"group": "build",
+				"dependsOrder": "sequence",
+				"dependsOn": [
+					"cmake-debug",
+					"ninja-debug"
+				]
+			},
+			{
+				"label": "Release",
+				"group": "build",
+				"dependsOrder": "sequence",
+				"dependsOn": [
+					"cmake-release",
+					"ninja-release"
+				]
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Debug",
+				"type": "lldb",
+				"request": "launch",
+				"cwd": "${workspaceRoot}/build/bin/debug",
+				"program": "${workspaceRoot}/build/bin/debug/app",
+				"preLaunchTask": "Debug",
+				"windows": {
+					"program": "${workspaceRoot}/build/bin/debug/app.exe",
+				}
+			},
+			{
+				"name": "Release",
+				"type": "lldb",
+				"request": "launch",
+				"cwd": "${workspaceRoot}/build/bin/release",
+				"program": "${workspaceRoot}/build/bin/release/app",
+				"preLaunchTask": "Release",
+				"windows": {
+					"program": "${workspaceRoot}/build/bin/release/app.exe",
+				}
+			},
+		]
+	}
+}

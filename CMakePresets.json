@@ -1,0 +1,56 @@
+{
+    "version": 1,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 19,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "default",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/obj/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/obj/${presetName}/install",
+                "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/build/bin/${presetName}",
+                "CMAKE_LIBRARY_OUTPUT_DIRECTORY": "${sourceDir}/build/bin/${presetName}",
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++",
+                "CMAKE_AR": "llvm-ar",
+                "CMAKE_RANLIB": "llvm-ranlib",
+                "CMAKE_C_LINK_FLAGS": "-fuse-ld=lld",
+                "CMAKE_CXX_LINK_FLAGS": "-fuse-ld=lld"
+            },
+            "environment": {
+                "COMPILER_FLAGS_SHARED": "-pipe -Werror -Wall -Wextra -Wmost -Wpedantic -Wdeprecated -Wmissing-declarations -Wredundant-decls -Wdouble-promotion -Wconversion -Wsign-conversion -Wcast-align -Wcast-qual -Wnull-dereference -Wshadow -Wformat=2 -Wnon-virtual-dtor -W -Wunreachable-code -Wundef -Wfloat-equal -Wno-unused",
+                "COMPILER_FLAGS_C": "-std=c89",
+                "COMPILER_FLAGS_CXX": "-std=c++98 -fno-exceptions -fno-rtti"
+            }
+        },
+        {
+            "name": "debug",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_C_FLAGS_DEBUG": "$env{COMPILER_FLAGS_C} $env{COMPILER_FLAGS_SHARED} $env{COMPILER_FLAGS_DEBUG}",
+                "CMAKE_CXX_FLAGS_DEBUG": "$env{COMPILER_FLAGS_CXX} $env{COMPILER_FLAGS_SHARED} $env{COMPILER_FLAGS_DEBUG}",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": true
+            },
+            "environment": {
+                "COMPILER_FLAGS_DEBUG": "-g -DDEBUG -D_FORTIFY_SOURCE=1 -D_GLIBCXX_ASSERTIONS -fsanitize=address,undefined -fno-omit-frame-pointer"
+            }
+        },
+        {
+            "name": "release",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_C_FLAGS_RELEASE": "$env{COMPILER_FLAGS_C} $env{COMPILER_FLAGS_SHARED} $env{COMPILER_FLAGS_RELEASE}",
+                "CMAKE_CXX_FLAGS_RELEASE": "$env{COMPILER_FLAGS_CXX} $env{COMPILER_FLAGS_SHARED} $env{COMPILER_FLAGS_RELEASE}"
+            },
+            "environment": {
+                "COMPILER_FLAGS_RELEASE": "-O2 -DNDEBUG"
+            }
+        }
+    ]
+}
