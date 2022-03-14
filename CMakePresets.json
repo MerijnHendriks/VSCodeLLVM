@@ -22,7 +22,7 @@
                 "CMAKE_CXX_LINK_FLAGS": "-fuse-ld=lld"
             },
             "environment": {
-                "COMPILER_FLAGS_SHARED": "-pipe -Werror -Wall -Wextra -Wmost -Wpedantic -Wdeprecated -Wmissing-declarations -Wredundant-decls -Wdouble-promotion -Wconversion -Wsign-conversion -Wcast-align -Wcast-qual -Wnull-dereference -Wshadow -Wformat=2 -Wnon-virtual-dtor -W -Wunreachable-code -Wundef -Wfloat-equal -Wno-unused",
+                "COMPILER_FLAGS_SHARED": "-pipe -Wno-unused -Werror -Wall -Wextra -Wpedantic -Wdeprecated -Wconversion -Wformat=2 -Wshadow -Wunreachable-code -Wdouble-promotion -Wcast-align -Wcast-qual -Wfloat-equal -Wmissing-prototypes -Wnon-virtual-dtor -Woverlength-strings -Wundef",
                 "COMPILER_FLAGS_C": "-std=c89",
                 "COMPILER_FLAGS_CXX": "-std=c++98 -fno-exceptions -fno-rtti"
             }
