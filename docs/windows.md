@@ -1,5 +1,9 @@
 # Windows
 
+## TODO
+
+- Switch to [`MSYS2`](https://www.msys2.org/docs/environments/)
+
 ## Requirements
 
 **Tool**                  | **Version**
