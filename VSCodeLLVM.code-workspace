@@ -11,10 +11,11 @@
 		]
 	},
 	"settings": {
+		"clangd.onConfigChanged": "restart",
 		"clangd.arguments": [
 			"-background-index",
 			"-compile-commands-dir=build/obj/debug"
-		]
+		]		
 	},
 	"tasks": {
 		"version": "2.0.0",
