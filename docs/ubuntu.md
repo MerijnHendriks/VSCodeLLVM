@@ -40,3 +40,9 @@ sudo update-alternatives --install /usr/bin/llvm-ranlib llvm-ranlib /usr/bin/llv
 
 1. Open `VSCodeLLVM.code-workspace` in Visual Studio Code
 2. Allow workspace to change settings
+
+### FAQ
+
+#### Why does clang selects a gcc installation?
+
+For C(++) library and C++ ABI compatability with GCC.

@@ -21,7 +21,7 @@ Visual Studio Code        | 1.34+
 
 1. Download `ninja-win.zip`: [link](https://github.com/ninja-build/ninja/releases/latest)
 2. Extract the content to `C:\Program Files\Ninja\bin`
-3. Add `C:\Program Files\Ninja\bin` to system PATH
+3. Add Ninja (`C:\Program Files\Ninja\bin`) to system PATH
 
 ### Visual Studio Build Tools
 
@@ -30,6 +30,7 @@ Visual Studio Code        | 1.34+
    - `MSVC v143 - VS 2022 C++ x64/x86 build tools (Latest)`
    - `C++ Clang tools for Windows (13.0.0 - x64/x86)`
    - `Windows 10 SDK (10.1.19041.0)`
+3. Add LLVM (`C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\Llvm\bin`) to system PATH
 
 ### Visual Studio Code
 
@@ -45,7 +46,7 @@ Visual Studio Code        | 1.34+
 
 ## FAQ
 
-### Why do I need to install MSVC?
+### Why do I need to install MSVC besides clang?
 
 MSVC contains `msvcrt.lib`, `oldnames.lib` as well as some required headers which sadly don't ship with the Windows 10 SDK.
-You could use MinGW instead during linking, but I judged that MSVC compatibility is more important.
+You could use MinGW instead during linking, but I judged that MSVC compatibility is more important as most Windows libraries compile using MSVC.
