@@ -37,7 +37,7 @@
                 "CMAKE_EXPORT_COMPILE_COMMANDS": true
             },
             "environment": {
-                "COMPILER_FLAGS_DEBUG": "-g -DDEBUG -D_FORTIFY_SOURCE=1 -D_GLIBCXX_ASSERTIONS -fsanitize=address,undefined -fno-omit-frame-pointer"
+                "COMPILER_FLAGS_DEBUG": "-g -DDEBUG -D_FORTIFY_SOURCE=1 -D_GLIBCXX_ASSERTIONS -fsanitize=undefined"
             }
         },
         {

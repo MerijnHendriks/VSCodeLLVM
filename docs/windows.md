@@ -1,44 +1,31 @@
 # Windows
 
-## TODO
-
-- Switch to [`MSYS2`](https://www.msys2.org/docs/environments/)
-
 ## Requirements
 
 **Tool**                  | **Version**
 ------------------------- | -----------
 CMake                     | 3.19+
+LLVM                      | 13+
+MSYS2                     | 20220128+
 Ninja                     | 1.10+
-Visual Studio Build Tools | 17.1+
-Visual Studio Code        | 1.34+
 
 ## Setup
 
-### CMake
+### Packages
 
-1. Download the installer: [link](https://cmake.org/download/)
-2. For install options:
-   - Add to system PATH
+1. Download and install MSYS2: [link](https://github.com/msys2/msys2-installer/releases/latest)
+2. Run the following command(s) with `MSYS2 MinGW Clang x64`:
 
-### Ninja
-
-1. Download `ninja-win.zip`: [link](https://github.com/ninja-build/ninja/releases/latest)
-2. Extract the content to `C:\Program Files\Ninja\bin`
-3. Add Ninja (`C:\Program Files\Ninja\bin`) to system PATH
-
-### Visual Studio Build Tools
-
-1. Download the installer: [link](https://visualstudio.microsoft.com/downloads/?q=build+tools#build-tools-for-visual-studio-2022)
-2. For components to install, select only the following:
-   - `MSVC v143 - VS 2022 C++ x64/x86 build tools (Latest)`
-   - `C++ Clang tools for Windows (13.0.0 - x64/x86)`
-   - `Windows 10 SDK (10.1.19041.0)`
-3. Add LLVM (`C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\Llvm\bin`) to system PATH
+```sh
+pacman -S mingw-w64-clang-x86_64-clang
+pacman -S mingw-w64-clang-x86_64-clang-tools-extra
+pacman -S mingw-w64-clang-x86_64-ninja
+pacman -S mingw-w64-clang-x86_64-cmake
+```
 
 ### Visual Studio Code
 
-1. Download the installer: [link](https://code.visualstudio.com/download)
+1. Download and install VSCode: [link](https://code.visualstudio.com/download)
 2. Install the following extensions:
    - clangd: [link](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd)
    - CodeLLDB: [link](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb)
@@ -48,9 +35,6 @@ Visual Studio Code        | 1.34+
 1. Open `VSCodeLLVM.code-workspace` in Visual Studio Code
 2. Allow workspace to change settings
 
-## FAQ
+## Notes
 
-### Why do I need to install MSVC besides clang?
-
-MSVC contains `msvcrt.lib`, `oldnames.lib` as well as some required headers which sadly don't ship with the Windows 10 SDK.
-You could use MinGW instead during linking, but I judged that MSVC compatibility is more important as most Windows libraries compile using MSVC.
+You must distribute the Universal C Runtime (UCRT) alongside your application for Windows versions older than Windows 10.
