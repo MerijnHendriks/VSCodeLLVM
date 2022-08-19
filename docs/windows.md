@@ -17,10 +17,7 @@ Ninja                     | 1.10+
 2. Run the following command(s) with `MSYS2 MinGW Clang x64`:
 
 ```sh
-pacman -S mingw-w64-clang-x86_64-clang
-pacman -S mingw-w64-clang-x86_64-clang-tools-extra
-pacman -S mingw-w64-clang-x86_64-ninja
-pacman -S mingw-w64-clang-x86_64-cmake
+pacman -S mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-clang-tools-extra mingw-w64-clang-x86_64-ninja mingw-w64-clang-x86_64-cmake
 ```
 
 ### Visual Studio Code
