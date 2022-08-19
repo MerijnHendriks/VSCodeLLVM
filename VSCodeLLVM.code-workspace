@@ -13,14 +13,14 @@
 	"settings": {
 		"terminal.integrated.defaultProfile.windows": "msys2-clang64",
 		"terminal.integrated.profiles.windows": {
-			"msys2-clang64": {
-				"path": "C:\\msys64\\usr\\bin\\bash.exe",
-				"args": ["--login", "-i"],
-				"env": { 
-					"MSYSTEM": "CLANG64", 
-					"CHERE_INVOKING":"1"
-				}
-			}
+		   "msys2-clang64": {
+			  "path": "C:\\msys64\\usr\\bin\\bash.exe",
+			  "args": ["--login", "-i"],
+			  "env": { 
+				 "MSYSTEM": "CLANG64", 
+				 "CHERE_INVOKING":"1"
+			  }
+		   }
 		},
 		"clangd.path": "clangd",
 		"clangd.onConfigChanged": "restart",
@@ -102,7 +102,7 @@
 				"windows": {
 					"program": "${workspaceRoot}/build/bin/release/app.exe",
 				}
-			},
+			}
 		]
 	}
 }
