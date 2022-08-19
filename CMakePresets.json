@@ -8,6 +8,7 @@
     "configurePresets": [
         {
             "name": "default",
+            "hidden": true,
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/obj/${presetName}",
             "cacheVariables": {
@@ -17,16 +18,15 @@
                 "CMAKE_C_COMPILER": "clang",
                 "CMAKE_CXX_COMPILER": "clang++",
                 "CMAKE_AR": "llvm-ar",
-                "CMAKE_RANLIB": "llvm-ranlib",
-                "CMAKE_C_LINK_FLAGS": "$env{COMPILER_FLAGS_LINKER}",
-                "CMAKE_CXX_LINK_FLAGS": "$env{COMPILER_FLAGS_LINKER}"
+                "CMAKE_RANLIB": "llvm-ranlib"
             },
             "environment": {
                 "COMPILER_FLAGS_WARNINGS": "-Wno-unused -Werror -Wall -Wextra -Wpedantic -Wdeprecated -Wconversion -Wformat=2 -Wshadow -Wunreachable-code -Wdouble-promotion -Wcast-align -Wcast-qual -Wfloat-equal -Wmissing-prototypes -Wnon-virtual-dtor -Woverlength-strings -Wundef",
-                "COMPILER_FLAGS_CODEGEN": "-pipe -flto=thin -fdata-sections -ffunction-sections",
-                "COMPILER_FLAGS_LINKER": "-fuse-ld=lld -flto=thin -Wl,--gc-sections -Wl,--as-needed",
-                "COMPILER_FLAGS_C": "$env{COMPILER_FLAGS_WARNINGS} $env{COMPILER_FLAGS_CODEGEN} -std=c99",
-                "COMPILER_FLAGS_CXX": "$env{COMPILER_FLAGS_WARNINGS} $env{COMPILER_FLAGS_CODEGEN} -std=c++03 -fno-exceptions -fno-rtti"
+                "COMPILER_FLAGS_CODEGEN": "-flto=thin -fdata-sections -ffunction-sections",
+                "COMPILE_FLAGS_OTHER": "-v -pipe",
+                "COMPILER_FLAGS_C": "$env{COMPILER_FLAGS_WARNINGS} $env{COMPILER_FLAGS_CODEGEN} $env{COMPILE_FLAGS_OTHER} -std=c99",
+                "COMPILER_FLAGS_CXX": "$env{COMPILER_FLAGS_WARNINGS} $env{COMPILER_FLAGS_CODEGEN} $env{COMPILE_FLAGS_OTHER} -std=c++03 -fno-exceptions -fno-rtti",
+                "COMPILER_FLAGS_LINK": "-fuse-ld=lld -flto=thin -Wl,--gc-sections -Wl,--as-needed"
             }
         },
         {
@@ -36,6 +36,8 @@
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_C_FLAGS_DEBUG": "$env{COMPILER_FLAGS_C} $env{COMPILER_FLAGS_SHARED_DEBUG}",
                 "CMAKE_CXX_FLAGS_DEBUG": "$env{COMPILER_FLAGS_CXX} $env{COMPILER_FLAGS_SHARED_DEBUG} -Wp,-D_GLIBCXX_ASSERTIONS",
+                "CMAKE_C_LINK_FLAGS": "$env{COMPILER_FLAGS_LINK}",
+                "CMAKE_CXX_LINK_FLAGS": "$env{COMPILER_FLAGS_LINK}",
                 "CMAKE_EXPORT_COMPILE_COMMANDS": true
             },
             "environment": {
@@ -48,7 +50,9 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
                 "CMAKE_C_FLAGS_RELEASE": "$env{COMPILER_FLAGS_C} $env{COMPILER_FLAGS_SHARED_RELEASE}",
-                "CMAKE_CXX_FLAGS_RELEASE": "$env{COMPILER_FLAGS_CXX} $env{COMPILER_FLAGS_SHARED_RELEASE}"
+                "CMAKE_CXX_FLAGS_RELEASE": "$env{COMPILER_FLAGS_CXX} $env{COMPILER_FLAGS_SHARED_RELEASE}",
+                "CMAKE_C_LINK_FLAGS": "$env{COMPILER_FLAGS_LINK}",
+                "CMAKE_CXX_LINK_FLAGS": "$env{COMPILER_FLAGS_LINK}"
             },
             "environment": {
                 "COMPILER_FLAGS_SHARED_RELEASE": "-Oz -DNDEBUG"
