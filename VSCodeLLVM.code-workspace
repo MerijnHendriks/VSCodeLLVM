@@ -45,7 +45,7 @@
 			{
 				"label": "ninja-debug",
 				"type": "shell",
-				"command": "ninja -v",
+				"command": "ninja -v -d stats -d explain",
 				"options": {
 					"cwd": "${workspaceRoot}/build/obj/debug"
 				}
@@ -53,7 +53,7 @@
 			{
 				"label": "ninja-release",
 				"type": "shell",
-				"command": "ninja -v",
+				"command": "ninja -v -d stats -d explain",
 				"options": {
 					"cwd": "${workspaceRoot}/build/obj/release"
 				}
