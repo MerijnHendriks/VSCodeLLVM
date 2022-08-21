@@ -22,11 +22,11 @@
             },
             "environment": {
                 "COMPILER_FLAGS_WARNINGS": "-Werror -Wall -Wextra -Wpedantic -Wdeprecated -Wconversion -Wshadow-all -Wunreachable-code-aggressive -Wformat=2 -Wvla -Warray-bounds-pointer-arithmetic -Wassign-enum -Wbad-function-cast -Wcast-align -Wcast-qual -Wcomma -Wconditional-uninitialized -Wdouble-promotion -Wfloat-equal -Wformat-type-confusion -Wmissing-prototypes -Wnewline-eof -Wpacked -Wpointer-arith -Wshift-sign-overflow -Wstrict-prototypes -Wswitch-enum -Wtautological-constant-in-range-compare -Wthread-safety -Wundef -Wvariadic-macros -Wwritable-strings",
-                "COMPILER_FLAGS_CODEGEN": "-fno-omit-frame-pointer -fno-common -flto=thin -fdata-sections -ffunction-sections",
+                "COMPILER_FLAGS_CODEGEN": "-fno-omit-frame-pointer -fno-common -fdata-sections -ffunction-sections",
                 "COMPILE_FLAGS_OTHER": "-v -pipe",
                 "COMPILER_FLAGS_C": "$env{COMPILER_FLAGS_WARNINGS} $env{COMPILER_FLAGS_CODEGEN} $env{COMPILE_FLAGS_OTHER} -std=c99",
                 "COMPILER_FLAGS_CXX": "$env{COMPILER_FLAGS_WARNINGS} $env{COMPILER_FLAGS_CODEGEN} $env{COMPILE_FLAGS_OTHER} -std=c++03 -Wnon-virtual-dtor -Wold-style-cast -fno-exceptions -fno-rtti",
-                "COMPILER_FLAGS_LINK": "-fuse-ld=lld -flto=thin -Wl,--gc-sections -Wl,--as-needed"
+                "COMPILER_FLAGS_LINK": "-fuse-ld=lld -Wl,--gc-sections -Wl,--as-needed"
             }
         },
         {
@@ -35,13 +35,13 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_C_FLAGS_DEBUG": "$env{COMPILER_FLAGS_C} $env{COMPILER_FLAGS_SHARED_DEBUG}",
-                "CMAKE_CXX_FLAGS_DEBUG": "$env{COMPILER_FLAGS_CXX} $env{COMPILER_FLAGS_SHARED_DEBUG} -Wp,-D_GLIBCXX_ASSERTIONS",
+                "CMAKE_CXX_FLAGS_DEBUG": "$env{COMPILER_FLAGS_CXX} $env{COMPILER_FLAGS_SHARED_DEBUG}",
                 "CMAKE_C_LINK_FLAGS": "$env{COMPILER_FLAGS_LINK}",
                 "CMAKE_CXX_LINK_FLAGS": "$env{COMPILER_FLAGS_LINK}",
                 "CMAKE_EXPORT_COMPILE_COMMANDS": true
             },
             "environment": {
-                "COMPILER_FLAGS_SHARED_DEBUG": "-g -DDEBUG -Wp,-D_FORTIFY_SOURCE=1 -fsanitize=undefined -fsanitize=cfi -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fsanitize=integer -fno-sanitize-recover -Wno-unused"
+                "COMPILER_FLAGS_SHARED_DEBUG": "-g -DDEBUG -Wno-unused"
             }
         },
         {
