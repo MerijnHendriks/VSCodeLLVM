@@ -26,17 +26,8 @@ pacman -S mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-clang-tools-extra 
 1. Download and install VSCode: [link](https://code.visualstudio.com/download)
 2. Install the following extensions:
    - clangd: [link](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd)
-   - CodeLLDB: [link](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb)
 
 ### 3. Project
 
 1. Open `VSCodeLLVM.code-workspace` in Visual Studio Code
 2. Allow workspace to change settings
-
-## Notes
-
-For windows, you must distribute the Universal C Runtime (UCRT) alongside your
-application for Windows versions older than Windows 10.
-
-For linux, if you use the flatpak version of vscode you'll need to grant it
-additional permissions to access system tools and libraries.

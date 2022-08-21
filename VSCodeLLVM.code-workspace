@@ -62,46 +62,13 @@
 				"label": "Debug",
 				"group": "build",
 				"dependsOrder": "sequence",
-				"dependsOn": [
-					"cmake-debug",
-					"ninja-debug"
-				]
+				"dependsOn": ["cmake-debug", "ninja-debug"]
 			},
 			{
 				"label": "Release",
 				"group": "build",
 				"dependsOrder": "sequence",
-				"dependsOn": [
-					"cmake-release",
-					"ninja-release"
-				]
-			}
-		]
-	},
-	"launch": {
-		"version": "0.2.0",
-		"configurations": [
-			{
-				"name": "Debug",
-				"type": "lldb",
-				"request": "launch",
-				"cwd": "${workspaceRoot}/build/bin/debug",
-				"program": "${workspaceRoot}/build/bin/debug/app",
-				"preLaunchTask": "Debug",
-				"windows": {
-					"program": "${workspaceRoot}/build/bin/debug/app.exe",
-				}
-			},
-			{
-				"name": "Release",
-				"type": "lldb",
-				"request": "launch",
-				"cwd": "${workspaceRoot}/build/bin/release",
-				"program": "${workspaceRoot}/build/bin/release/app",
-				"preLaunchTask": "Release",
-				"windows": {
-					"program": "${workspaceRoot}/build/bin/release/app.exe",
-				}
+				"dependsOn": ["cmake-release", "ninja-release"]
 			}
 		]
 	}
