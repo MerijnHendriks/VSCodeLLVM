@@ -9,7 +9,7 @@
 1. Run the following command(s) in the terminal:
 
 ```sh
-sudo apt install --no-install-recommends llvm lld clang clang-format clang-tidy clangd cmake ninja-build
+sudo apt install --no-install-recommends llvm lld clang clang-format clang-tidy clangd
 ```
 
 #### Windows
@@ -18,7 +18,14 @@ sudo apt install --no-install-recommends llvm lld clang clang-format clang-tidy 
 2. Run the following command(s) with `MSYS2 MinGW Clang x64`:
 
 ```sh
-pacman -S mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-clang-tools-extra mingw-w64-clang-x86_64-ninja mingw-w64-clang-x86_64-cmake
+pacman -S make mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-clang-tools-extra
+```
+
+3. Add symbolic link to `make`:
+
+```sh
+cd C:\msys64\clang64\bin
+mklink make C:\msys64\usr\bin\make.exe
 ```
 
 ### 2. Visual Studio Code
