@@ -5,6 +5,7 @@
 # global
 PROJECT_NAME         := app
 INCLUDE_FOLDERS      := include
+LIBRARY_FOLDERS      := 
 LIBRARIES            := m
 TOOL_C               := clang
 TOOL_CXX             := clang++
@@ -51,8 +52,7 @@ release: CXXFLAGS := $(FLAGS_BASE_CXX) $(FLAGS_RELEASE_CXX)
 SOURCES           := $(shell find $(SRC_FOLDER) -name '*.cpp' -or -name '*.c' -or -name '*.s')
 OBJECTS           := $(SOURCES:%=$(OBJ_FOLDER)/%.o)
 INCLUDE_FLAGS     := $(addprefix -I,$(INCLUDE_FOLDERS))
-LIBRARY_FLAGS     := $(addprefix -l,$(LIBRARIES))
-LDFLAGS           := $(FLAGS_BASE_LD) $(LIBRARY_FLAGS)
+LDFLAGS           := $(FLAGS_BASE_LD) $(addprefix -L,$(LIBRARY_FOLDERS)) $(addprefix -l,$(LIBRARIES))
 
 $(BIN_FOLDER)/$(PROJECT_NAME): $(OBJECTS)
 	mkdir -p $(dir $@)
