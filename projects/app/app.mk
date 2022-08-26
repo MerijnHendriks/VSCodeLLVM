@@ -38,6 +38,7 @@ $(BIN_FOLDER)/$(PROJECT_NAME): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) $(LDLIBS)
 
 $(OBJ_FOLDER)/%.s.o: %.s
+	mkdir -p $(dir $@)
 	$(AS) $(ASFLAGS) $< -o $@
 
 $(OBJ_FOLDER)/%.c.o: %.c
