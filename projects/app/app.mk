@@ -43,20 +43,25 @@ BIN_FOLDER        := bin
 debug: $(BIN_FOLDER)/$(PROJECT_NAME)
 debug: CFLAGS     := $(FLAGS_BASE_C) $(FLAGS_DEBUG_C)
 debug: CXXFLAGS   := $(FLAGS_BASE_CXX) $(FLAGS_DEBUG_CXX)
+debug: OBJ_FOLDER := obj/debug
+debug: BIN_FOLDER := bin/debug
 
 release: $(BIN_FOLDER)/$(PROJECT_NAME)
-release: CFLAGS   := $(FLAGS_BASE_C) $(FLAGS_RELEASE_C)
-release: CXXFLAGS := $(FLAGS_BASE_CXX) $(FLAGS_RELEASE_CXX)
+release: CFLAGS     := $(FLAGS_BASE_C) $(FLAGS_RELEASE_C)
+release: CXXFLAGS   := $(FLAGS_BASE_CXX) $(FLAGS_RELEASE_CXX)
+release: OBJ_FOLDER := obj/release
+release: BIN_FOLDER := bin/release
 
 # build stages
 SOURCES           := $(shell find $(SRC_FOLDER) -name '*.cpp' -or -name '*.c' -or -name '*.s')
 OBJECTS           := $(SOURCES:%=$(OBJ_FOLDER)/%.o)
 INCLUDE_FLAGS     := $(addprefix -I,$(INCLUDE_FOLDERS))
-LDFLAGS           := $(FLAGS_BASE_LD) $(addprefix -L,$(LIBRARY_FOLDERS)) $(addprefix -l,$(LIBRARIES))
+LDFLAGS           := $(FLAGS_BASE_LD) 
+LDLIBS            := $(addprefix -L,$(LIBRARY_FOLDERS)) $(addprefix -l,$(LIBRARIES))
 
 $(BIN_FOLDER)/$(PROJECT_NAME): $(OBJECTS)
 	mkdir -p $(dir $@)
-	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
+	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) $(LDLIBS)
 
 $(OBJ_FOLDER)/%.c.o: %.c
 	mkdir -p $(dir $@)
