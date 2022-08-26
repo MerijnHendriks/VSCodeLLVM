@@ -30,12 +30,14 @@ BIN_FOLDER		:= bin
 OBJ_FOLDER		:= obj
 SOURCES			:= $(shell find $(SOURCE_FOLDER) -name '*.s' -or -name '*.c' -or -name '*.cpp')
 OBJECTS			:= $(SOURCES:%=$(OBJ_FOLDER)/%.o)
-INCLUDE_FLAGS	:= $(addprefix -I,$(INCLUDE_FOLDERS))
-LDLIBS			:= $(addprefix -L,$(LIBRARY_FOLDERS)) $(addprefix -l,$(LIBRARIES))
+DEPENDENCIES	:= $(OBJECTS:.o=.d)
+CFLAGS			+= $(addprefix -I,$(INCLUDE_FOLDERS)) -MMD -MP
+CXXFLAGS		+= $(addprefix -I,$(INCLUDE_FOLDERS)) -MMD -MP
+LDFLAGS			+= $(addprefix -L,$(LIBRARY_FOLDERS)) $(addprefix -l,$(LIBRARIES))
 
 $(BIN_FOLDER)/$(PROJECT_NAME): $(OBJECTS)
 	mkdir -p $(dir $@)
-	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) $(LDLIBS)
+	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
 
 $(OBJ_FOLDER)/%.s.o: %.s
 	mkdir -p $(dir $@)
@@ -43,17 +45,15 @@ $(OBJ_FOLDER)/%.s.o: %.s
 
 $(OBJ_FOLDER)/%.c.o: %.c
 	mkdir -p $(dir $@)
-	$(CC) $(INCLUDE_FLAGS) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_FOLDER)/%.cpp.o: %.cpp
 	mkdir -p $(dir $@)
-	$(CXX) $(INCLUDE_FLAGS) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # targets
 debug: $(BIN_FOLDER)/$(PROJECT_NAME)
-
 release: $(BIN_FOLDER)/$(PROJECT_NAME)
-
 clean:
 	rm -rf $(OBJ_FOLDER)
 	rm -rf $(BIN_FOLDER)
