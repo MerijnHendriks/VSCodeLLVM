@@ -18,7 +18,7 @@ sudo apt install --no-install-recommends llvm lld clang clang-format clang-tidy 
 2. Run the following command(s) with `MSYS2 MinGW Clang x64`:
 
 ```sh
-pacman -S make mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-clang-tools-extra
+pacman -S make mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-clang-tools-extra mingw-w64-clang-x86_64-nasm
 ```
 
 3. Add symbolic link to `make`:
