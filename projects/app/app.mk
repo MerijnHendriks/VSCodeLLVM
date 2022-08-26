@@ -32,7 +32,6 @@ OBJ_FOLDER		:= obj
 SOURCES			:= $(shell find $(SOURCE_FOLDER) -name '*.s' -or -name '*.c' -or -name '*.cpp')
 OBJECTS			:= $(SOURCES:%=$(OBJ_FOLDER)/%.o)
 INCLUDE_FLAGS	:= $(addprefix -I,$(INCLUDE_FOLDERS))
-LDFLAGS			:= $(FLAGS_BASE_LD) 
 LDLIBS			:= $(addprefix -L,$(LIBRARY_FOLDERS)) $(addprefix -l,$(LIBRARIES))
 
 $(BIN_FOLDER)/$(PROJECT_NAME): $(OBJECTS)
