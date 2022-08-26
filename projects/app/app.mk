@@ -10,11 +10,10 @@ LIBRARIES			:= m
 BASE_FLAGS			:= -fno-omit-frame-pointer -fno-common -fdata-sections -ffunction-sections -Werror -Wall -Wextra -Wpedantic -Wdeprecated -Wconversion -Wshadow-all -Wunreachable-code-aggressive -Wformat=2 -Wvla -Warray-bounds-pointer-arithmetic -Wassign-enum -Wbad-function-cast -Wcast-align -Wcast-qual -Wcomma -Wconditional-uninitialized -Wdouble-promotion -Wfloat-equal -Wformat-type-confusion -Wmissing-prototypes -Wnewline-eof -Wpacked -Wpointer-arith -Wshift-sign-overflow -Wstrict-prototypes -Wswitch-enum -Wtautological-constant-in-range-compare -Wthread-safety -Wundef -Wvariadic-macros -Wwritable-strings
 CFLAGS				:= $(BASE_FLAGS) -std=c99
 CXXFLAGS			:= $(BASE_FLAGS) -std=c++03 -fno-exceptions -fno-rtti -Wnon-virtual-dtor -Wold-style-cast
-LDFLAGS				:= -Wl,--gc-sections -Wl,--as-needed
+LDFLAGS				:= -fuse-ld=lld -Wl,--gc-sections -Wl,--as-needed
 ASFLAGS             := -f win64
 CC					:= clang
 CXX					:= clang++
-LD					:= ldd
 AS                  := nasm
 
 debug: CFLAGS		+= -DDEBUG -g -Wno-unused
