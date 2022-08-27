@@ -75,7 +75,19 @@ $(BIN_FOLDER)/$(PROJECT_NAME): $(OBJECTS)
 
 # targets
 debug: $(BIN_FOLDER)/$(PROJECT_NAME)
+
 release: $(BIN_FOLDER)/$(PROJECT_NAME)
+
 clean:
 	rm -rf $(OBJ_FOLDER)
 	rm -rf $(BIN_FOLDER)
+	rm -rf compile_commands.json
+
+analyze: SOURCES := $(shell find $(SOURCE_FOLDER) -name '*.c' -or -name '*.cpp')
+analyze:
+	$(MAKE) -Bnwk debug | compiledb -o- > compile_commands.json
+	@for src in $(SOURCES) ; do \
+		echo "Formatting $$src..." ; \
+		clang-format -i "$$src" ; \
+		clang-tidy -p . "$$src" ; \
+	done

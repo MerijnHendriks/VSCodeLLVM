@@ -13,6 +13,7 @@
 		"terminal.integrated.defaultProfile.windows": "MSYS2",
 		"terminal.integrated.profiles.windows": {
 		   "MSYS2": {
+			  "overrideName": true,
 			  "path": "C:\\msys64\\usr\\bin\\bash.exe",
 			  "args": ["--login", "-i"],
 			  "env": { 
@@ -24,8 +25,7 @@
 		"clangd.path": "clangd",
 		"clangd.onConfigChanged": "restart",
 		"clangd.arguments": [
-			"-background-index",
-			"-compile-commands-dir=build/obj/debug"
+			"-background-index"
 		]
 	},
 	"tasks": {
@@ -35,6 +35,11 @@
 				"label": "Make: Clean",
 				"type": "shell",
 				"command": "make clean"
+			},
+			{
+				"label": "Make: Analyze",
+				"type": "shell",
+				"command": "make analyze"
 			},
 			{
 				"label": "Make: Debug",
@@ -50,13 +55,13 @@
 				"label": "Build: Debug",
 				"group": "build",
 				"dependsOrder": "sequence",
-				"dependsOn": [ "Make: Clean", "Make: Debug" ]
+				"dependsOn": [ "Make: Clean", "Make: Analyze", "Make: Debug" ]
 			},
 			{
 				"label": "Build: Release",
 				"group": "build",
 				"dependsOrder": "sequence",
-				"dependsOn": [ "Make: Clean", "Make: Release" ]
+				"dependsOn": [ "Make: Clean", "Make: Analyze", "Make: Release" ]
 			}
 		]
 	}

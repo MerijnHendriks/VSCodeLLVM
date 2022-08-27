@@ -9,7 +9,8 @@
 1. Run the following command(s) in the terminal:
 
 ```sh
-sudo apt install --no-install-recommends llvm lld clang clang-format clang-tidy clangd
+sudo apt install --no-install-recommends llvm lld clang clang-format clang-tidy clangd python3-pip
+pip install compiledb
 ```
 
 #### Windows
@@ -18,14 +19,15 @@ sudo apt install --no-install-recommends llvm lld clang clang-format clang-tidy 
 2. Run the following command(s) with `MSYS2 MinGW Clang x64`:
 
 ```sh
-pacman -S make mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-clang-tools-extra mingw-w64-clang-x86_64-nasm
+pacman -S mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-clang-tools-extra  mingw-w64-clang-x86_64-make mingw-w64-clang-x86_64-nasm mingw-w64-clang-x86_64-python-pip
+pip install compiledb
 ```
 
 3. Add symbolic link to `make`:
 
-```sh
+```cmd
 cd C:\msys64\clang64\bin
-mklink make C:\msys64\usr\bin\make.exe
+mklink make C:\msys64\clang64\bin\mingw32-make.exe
 ```
 
 ### 2. Visual Studio Code
