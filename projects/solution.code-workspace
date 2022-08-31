@@ -4,11 +4,6 @@
 			"path": "."
 		}
 	],
-	"extensions": {
-		"recommendations": [
-			"llvm-vs-code-extensions.vscode-clangd"
-		]
-	},
 	"settings": {
 		"terminal.integrated.defaultProfile.windows": "MSYS2",
 		"terminal.integrated.profiles.windows": {
@@ -21,12 +16,7 @@
 				 "CHERE_INVOKING": "1"
 			  }
 		   }
-		},
-		"clangd.path": "clangd",
-		"clangd.onConfigChanged": "restart",
-		"clangd.arguments": [
-			"-background-index"
-		]
+		}
 	},
 	"tasks": {
 		"version": "2.0.0",

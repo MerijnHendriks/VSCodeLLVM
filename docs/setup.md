@@ -33,10 +33,12 @@ mklink make C:\msys64\clang64\bin\mingw32-make.exe
 ### 2. Visual Studio Code
 
 1. Download and install VSCode: [link](https://code.visualstudio.com/download)
-2. Install the following extensions:
-   - clangd: [link](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd)
+2. Open `VSCodeLLVM.code-workspace` in Visual Studio Code
+3. Allow workspace to change settings
 
-### 3. Project
+### FAQ
 
-1. Open `VSCodeLLVM.code-workspace` in Visual Studio Code
-2. Allow workspace to change settings
+#### I don't have MSYS2 as terminal in VSCode
+
+Copy-paste the terminal profile from the workspace to the `settings.json` of
+vscode.
