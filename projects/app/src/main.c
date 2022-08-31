@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ext.h>
+#include "../include/ext.h"
 
 extern int foo(void);
 
