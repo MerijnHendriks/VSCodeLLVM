@@ -30,11 +30,19 @@ cd C:\msys64\clang64\bin
 mklink make C:\msys64\clang64\bin\mingw32-make.exe
 ```
 
+4. Add `clangd` to PATH:
+
+```cmd
+setx /M PATH "%PATH%;C:\msys64\clang64\bin\"
+```
+
 ### 2. Visual Studio Code
 
 1. Download and install VSCode: [link](https://code.visualstudio.com/download)
-2. Open `VSCodeLLVM.code-workspace` in Visual Studio Code
-3. Allow workspace to change settings
+2. Download and install the following VSCode extensions:
+    - clangd: [link](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd)
+3. Open `VSCodeLLVM.code-workspace` in VSCode
+4. Allow workspace to change settings
 
 ### FAQ
 
