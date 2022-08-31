@@ -4,6 +4,11 @@
 			"path": "."
 		}
 	],
+	"extensions": {
+		"recommendations": [
+			"llvm-vs-code-extensions.vscode-clangd"
+		]
+	},
 	"settings": {
 		"terminal.integrated.defaultProfile.windows": "MSYS2",
 		"terminal.integrated.profiles.windows": {
