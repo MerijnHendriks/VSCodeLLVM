@@ -1,0 +1,62 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"terminal.integrated.defaultProfile.windows": "MSYS2",
+		"terminal.integrated.profiles.windows": {
+		   "MSYS2": {
+			  "overrideName": true,
+			  "path": "C:\\msys64\\usr\\bin\\bash.exe",
+			  "args": ["--login", "-i"],
+			  "env": { 
+				 "MSYSTEM": "CLANG64", 
+				 "CHERE_INVOKING": "1"
+			  }
+		   }
+		},
+		"clangd.arguments": [
+			"-background-index",
+			"-compile-commands-dir=.cache/clangd"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Make: Clean",
+				"type": "shell",
+				"command": "make clean"
+			},
+			{
+				"label": "Make: Debug",
+				"type": "shell",
+				"command": "make debug"
+			},
+			{
+				"label": "Make: Release",
+				"type": "shell",
+				"command": "make release"
+			},
+			{
+				"label": "CompileDB: Generate",
+				"type": "shell",
+				"command": "mkdir -p .cache/clangd/ && make -Bnwk debug | compiledb -o- > .cache/clangd/compile_commands.json"
+			},
+			{
+				"label": "Build: Debug",
+				"group": "build",
+				"dependsOrder": "sequence",
+				"dependsOn": [ "Make: Clean", "CompileDB: Generate", "Make: Debug" ]
+			},
+			{
+				"label": "Build: Release",
+				"group": "build",
+				"dependsOrder": "sequence",
+				"dependsOn": [ "Make: Clean", "Make: Release" ]
+			}
+		]
+	}
+}

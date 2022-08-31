@@ -1,14 +1,10 @@
 # Frequently Asked Questions
 
-## Why is LTO enabled?
-
-It is required for `-sanitizer=cfi` to function.
-
 ## Why are RTTI and exceptions disabled?
 
-I want C++ to behave as C with classes.
+I want C++ to behave as C with classes and limit features to increase portability.
 
-## Why did you chose the specific language standards?
+## Why did you choose the specific language standards?
 
 I think that C99 and C++03 are the closest match in terms of features.
 
