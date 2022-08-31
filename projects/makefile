@@ -1,8 +1,8 @@
 debug:
-	@$(MAKE) -C app debug
+	@$(MAKE) -C app -f app.mk debug
 
 release:
-	@$(MAKE) -C app release
+	@$(MAKE) -C app -f app.mk release
 
 clean:
-	@$(MAKE) -C app clean
+	@$(MAKE) -C app -f app.mk clean
