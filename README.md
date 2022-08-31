@@ -16,9 +16,8 @@ To provide a solid cross-platform project template;
 
 **Tool**           | **Version**
 ------------------ | -----------
-CMake              | 3.19.8
+Make               | 4.3
 LLVM               | 14.0.3
-Ninja              | 1.11.0
 Visual Studio Code | 1.70
 
 ## Setup
