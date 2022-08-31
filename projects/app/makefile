@@ -52,19 +52,19 @@ endif
 
 ifeq ($(UNAME_S),Linux)
 	ifeq ($(UNAME_P),x86_64)
-			ASFLAGS += -f elf32
-		endif
-		ifneq ($(filter %86,$(UNAME_P)),)
-			ASFLAGS += -f elf64
+		ASFLAGS += -f elf32
+	endif
+	ifneq ($(filter %86,$(UNAME_P)),)
+		ASFLAGS += -f elf64
 	endif
 endif
 
 ifeq ($(UNAME_S),Darwin)
 	ifeq ($(UNAME_P),x86_64)
-			ASFLAGS += -f macho32
-		endif
-		ifneq ($(filter %86,$(UNAME_P)),)
-			ASFLAGS += -f macho64
+		ASFLAGS += -f macho32
+	endif
+	ifneq ($(filter %86,$(UNAME_P)),)
+		ASFLAGS += -f macho64
 	endif
 endif
 
@@ -114,11 +114,3 @@ release: $(BIN_FOLDER)/$(PROJECT_NAME)
 clean:
 	rm -rf $(OBJ_FOLDER)
 	rm -rf $(BIN_FOLDER)
-
-analyze: SOURCES := $(shell find $(SOURCE_FOLDER) -name '*.c' -or -name '*.cpp')
-analyze:
-	@for src in $(SOURCES) ; do \
-		echo "Analyzing $$src..." ; \
-		clang-format -i "$$src" ; \
-		clang-tidy -p . "$$src" ; \
-	done

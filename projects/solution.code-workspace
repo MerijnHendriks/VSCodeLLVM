@@ -16,7 +16,11 @@
 				 "CHERE_INVOKING": "1"
 			  }
 		   }
-		}
+		},
+		"clangd.arguments": [
+			"-background-index",
+			"-compile-commands-dir=.cache/clangd"
+		]
 	},
 	"tasks": {
 		"version": "2.0.0",
@@ -25,11 +29,6 @@
 				"label": "Make: Clean",
 				"type": "shell",
 				"command": "make clean"
-			},
-			{
-				"label": "Make: Analyze",
-				"type": "shell",
-				"command": "make analyze"
 			},
 			{
 				"label": "Make: Debug",
@@ -42,16 +41,21 @@
 				"command": "make release"
 			},
 			{
+				"label": "CompileDB: Generate",
+				"type": "shell",
+				"command": "mkdir -p .cache/clangd/ && make -Bnwk debug | compiledb -o- > .cache/clangd/compile_commands.json"
+			},
+			{
 				"label": "Build: Debug",
 				"group": "build",
 				"dependsOrder": "sequence",
-				"dependsOn": [ "Make: Clean", "Make: Analyze", "Make: Debug" ]
+				"dependsOn": [ "Make: Clean", "CompileDB: Generate", "Make: Debug" ]
 			},
 			{
 				"label": "Build: Release",
 				"group": "build",
 				"dependsOrder": "sequence",
-				"dependsOn": [ "Make: Clean", "Make: Analyze", "Make: Release" ]
+				"dependsOn": [ "Make: Clean", "Make: Release" ]
 			}
 		]
 	}
