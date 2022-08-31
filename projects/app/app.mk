@@ -6,7 +6,7 @@
 PROJECT_NAME		:= app
 
 # folders
-SOURCE_FOLDER		:= src
+SOURCES_FOLDER		:= src
 INCLUDE_FOLDERS		:= 
 LIBRARY_FOLDERS		:= 
 
@@ -71,7 +71,7 @@ endif
 # get objects to generate
 BIN_FOLDER		:= bin
 OBJ_FOLDER		:= obj
-SOURCES			:= $(shell find $(SOURCE_FOLDER) -name '*.s' -or -name '*.c' -or -name '*.cpp')
+SOURCES			:= $(shell find $(SOURCES_FOLDER) -name '*.s' -or -name '*.c' -or -name '*.cpp')
 OBJECTS			:= $(SOURCES:%=$(OBJ_FOLDER)/%.o)
 
 # add object dependencies
