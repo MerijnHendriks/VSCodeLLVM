@@ -9,8 +9,9 @@
 1. Run the following command(s) in the terminal:
 
 ```sh
-sudo apt install --no-install-recommends llvm lld clang clang-format clang-tidy clangd python3-pip
-pip install compiledb
+sudo apt install --no-install-recommends llvm lld clang clang-format clang-tidy clangd pipx
+pipx ensurepath
+pipx install compiledb
 ```
 
 #### Windows
