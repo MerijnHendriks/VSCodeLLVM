@@ -24,8 +24,8 @@ LDFLAGS				:= -fuse-ld=lld -Wl,--gc-sections -Wl,--as-needed -Wl,--no-undefined
 ASFLAGS             := 
 
 # debug
-debug: CFLAGS		+= -DDEBUG -g -Wno-unused -fno-omit-frame-pointer
-debug: CXXFLAGS		+= -DDEBUG -g -Wno-unused -fno-omit-frame-pointer
+debug: CFLAGS		+= -DDEBUG -g -Wno-unused -fno-omit-frame-pointer -fstack-usage
+debug: CXXFLAGS		+= -DDEBUG -g -Wno-unused -fno-omit-frame-pointer -fstack-usage
 
 # release
 release: CFLAGS		+= -DNDEBUG -Os
