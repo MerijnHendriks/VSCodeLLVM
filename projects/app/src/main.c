@@ -4,7 +4,7 @@
 
 extern int foo(void);
 
-int main()
+int main(void)
 {
     int32_t c = add(1, 2);
     int32_t d = foo();
