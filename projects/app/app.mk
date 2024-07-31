@@ -1,35 +1,38 @@
 # -----------------------------------------------------------------------------
 # Configurable options
+# Note: makefile cannot handle 4-spaces as tabs
 #------------------------------------------------------------------------------
 
 # global
-PROJECT_NAME        := app
+PROJECT_NAME		:= app
 
 # folders
-SOURCES_FOLDER      := src
-INCLUDE_FOLDERS     :=
-LIBRARY_FOLDERS     :=
+SOURCES_FOLDER		:= src
+INCLUDE_FOLDERS		:=
+LIBRARY_FOLDERS		:=
 
 # tools
-CC                  := clang
-CXX                 := clang++
-AS                  := nasm
+CC					:= clang
+CXX					:= clang++
+AS					:= nasm
 
 # flags
-LIBRARIES           := m
-BASE_FLAGS          := -fno-common -fdata-sections -ffunction-sections -Werror -Wall -Wextra -Wpedantic -Wdeprecated -Wconversion -Wshadow-all -Wunreachable-code-aggressive -Wformat=2 -Wvla -Warray-bounds-pointer-arithmetic -Wassign-enum -Wbad-function-cast -Wcast-align -Wcast-qual -Wcomma -Wconditional-uninitialized -Wdouble-promotion -Wfloat-equal -Wformat-type-confusion -Wmissing-prototypes -Wnewline-eof -Wpacked -Wpointer-arith -Wshift-sign-overflow -Wstrict-prototypes -Wswitch-enum -Wtautological-constant-in-range-compare -Wthread-safety -Wundef -Wvariadic-macros -Wwritable-strings
-CFLAGS              := $(BASE_FLAGS) -std=c99
-CXXFLAGS            := $(BASE_FLAGS) -std=c++03 -fno-exceptions -fno-rtti -Wnon-virtual-dtor -Wold-style-cast
-LDFLAGS             := -fuse-ld=lld -Wl,--gc-sections -Wl,--as-needed -Wl,--no-undefined
-ASFLAGS             :=
+LIBRARIES			:= m
+BASE_FLAGS			:= -fno-common -fdata-sections -ffunction-sections -Werror -Wall -Wextra -Wpedantic -Wdeprecated -Wconversion -Wshadow-all -Wunreachable-code-aggressive -Wformat=2 -Wvla -Warray-bounds-pointer-arithmetic -Wassign-enum -Wbad-function-cast -Wcast-align -Wcast-qual -Wcomma -Wconditional-uninitialized -Wdouble-promotion -Wfloat-equal -Wformat-type-confusion -Wmissing-prototypes -Wnewline-eof -Wpacked -Wpointer-arith -Wshift-sign-overflow -Wstrict-prototypes -Wswitch-enum -Wtautological-constant-in-range-compare -Wthread-safety -Wundef -Wvariadic-macros -Wwritable-strings
+CFLAGS				:= $(BASE_FLAGS) -std=c99
+CXXFLAGS			:= $(BASE_FLAGS) -std=c++03 -fno-exceptions -fno-rtti -Wnon-virtual-dtor -Wold-style-cast
+LDFLAGS				:= -fuse-ld=lld -Wl,--gc-sections -Wl,--as-needed -Wl,--no-undefined
+ASFLAGS				:=
 
 # debug
-debug: CFLAGS       += -DDEBUG -g -Wno-unused -fno-omit-frame-pointer -fstack-usage
-debug: CXXFLAGS     += -DDEBUG -g -Wno-unused -fno-omit-frame-pointer -fstack-usage
+debug: CFLAGS		+= -DDEBUG -g -fstack-usage -Wno-unused
+debug: CXXFLAGS		+= -DDEBUG -g -fstack-usage -Wno-unused
+debug: LDFLAGS		+= -fstack-usage
 
 # release
-release: CFLAGS     += -DNDEBUG -Os
-release: CXXFLAGS   += -DNDEBUG -Os
+release: CFLAGS		+= -DNDEBUG -Os -flto=full
+release: CXXFLAGS	+= -DNDEBUG -Os -flto=full
+release: LDFLAGS	+= -flto=full
 
 # -----------------------------------------------------------------------------
 # DO NOT CHANGE ANYTHING BELOW THIS
@@ -40,71 +43,71 @@ UNAME_S := $(shell uname -s)
 UNAME_P := $(shell uname -p)
 
 ifeq ($(OS),Windows_NT)
-    ifeq ($(PROCESSOR_ARCHITECTURE),AMD64)
-        INCLUDE_FOLDERS += C:/msys64/clang64/include
-        ASFLAGS += -f win64
+	ifeq ($(PROCESSOR_ARCHITECTURE),AMD64)
+    	INCLUDE_FOLDERS += C:/msys64/clang64/include
+     	ASFLAGS += -f win64
     endif
     ifeq ($(PROCESSOR_ARCHITECTURE),x86)
-        INCLUDE_FOLDERS += C:/msys64/clang32/include
-        ASFLAGS += -f win32
-    endif
+    	INCLUDE_FOLDERS += C:/msys64/clang32/include
+     	ASFLAGS += -f win32
+      endif
 endif
 
 ifeq ($(UNAME_S),Linux)
-    ifeq ($(UNAME_P),x86_64)
-        ASFLAGS += -f elf64
-    endif
-    ifneq ($(filter %86,$(UNAME_P)),)
-        ASFLAGS += -f elf32
-    endif
+	ifeq ($(UNAME_P),x86_64)
+	   ASFLAGS += -f elf64
+	endif
+	ifneq ($(filter %86,$(UNAME_P)),)
+	   ASFLAGS += -f elf32
+	endif
 endif
 
 ifeq ($(UNAME_S),Darwin)
-    ifeq ($(UNAME_P),x86_64)
-        ASFLAGS += -f macho64
-    endif
-    ifneq ($(filter %86,$(UNAME_P)),)
-        ASFLAGS += -f macho32
-    endif
+	ifeq ($(UNAME_P),x86_64)
+	   ASFLAGS += -f macho64
+	endif
+	ifneq ($(filter %86,$(UNAME_P)),)
+	   ASFLAGS += -f macho32
+	endif
 endif
 
 # get objects to generate
-BIN_FOLDER      := bin
-OBJ_FOLDER      := obj
-SOURCES         := $(shell find $(SOURCES_FOLDER) -name '*.s' -or -name '*.c' -or -name '*.cpp')
-OBJECTS         := $(SOURCES:%=$(OBJ_FOLDER)/%.o)
+BIN_FOLDER		:= bin
+OBJ_FOLDER		:= obj
+SOURCES			:= $(shell find $(SOURCES_FOLDER) -name '*.s' -or -name '*.c' -or -name '*.cpp')
+OBJECTS			:= $(SOURCES:%=$(OBJ_FOLDER)/%.o)
 
 # add object dependencies
-DEPENDENCIES    := $(OBJECTS:.o=.d)
-CFLAGS          += -MMD -MP
-CXXFLAGS        += -MMD -MP
+DEPENDENCIES	:= $(OBJECTS:.o=.d)
+CFLAGS			+= -MMD -MP
+CXXFLAGS		+= -MMD -MP
 
 # add headers
-CFLAGS          += $(addprefix -I,$(INCLUDE_FOLDERS))
-CXXFLAGS        += $(addprefix -I,$(INCLUDE_FOLDERS))
+CFLAGS			+= $(addprefix -I,$(INCLUDE_FOLDERS))
+CXXFLAGS		+= $(addprefix -I,$(INCLUDE_FOLDERS))
 
 # add libraries
-LDFLAGS         += $(addprefix -L,$(LIBRARY_FOLDERS)) $(addprefix -l,$(LIBRARIES))
+LDFLAGS			+= $(addprefix -L,$(LIBRARY_FOLDERS)) $(addprefix -l,$(LIBRARIES))
 
 # *.s > *.o
 $(OBJ_FOLDER)/%.s.o: %.s
-    mkdir -p $(dir $@)
-    $(AS) $(ASFLAGS) $< -o $@
+	mkdir -p $(dir $@)
+	$(AS) $(ASFLAGS) $< -o $@
 
 # *.c > *.o
 $(OBJ_FOLDER)/%.c.o: %.c
-    mkdir -p $(dir $@)
-    $(CC) $(CFLAGS) -c $< -o $@
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # *.cpp > *.o
 $(OBJ_FOLDER)/%.cpp.o: %.cpp
-    mkdir -p $(dir $@)
-    $(CXX) $(CXXFLAGS) -c $< -o $@
+	mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # *.o > binary
 $(BIN_FOLDER)/$(PROJECT_NAME): $(OBJECTS)
-    mkdir -p $(dir $@)
-    $(CC) $(OBJECTS) -o $@ $(LDFLAGS)
+	mkdir -p $(dir $@)
+	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
 
 # targets
 debug: $(BIN_FOLDER)/$(PROJECT_NAME)
@@ -112,5 +115,5 @@ debug: $(BIN_FOLDER)/$(PROJECT_NAME)
 release: $(BIN_FOLDER)/$(PROJECT_NAME)
 
 clean:
-    rm -rf $(OBJ_FOLDER)
-    rm -rf $(BIN_FOLDER)
+	rm -rf $(OBJ_FOLDER)
+	rm -rf $(BIN_FOLDER)
