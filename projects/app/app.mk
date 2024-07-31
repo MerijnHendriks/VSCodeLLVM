@@ -61,10 +61,10 @@ endif
 
 ifeq ($(UNAME_S),Darwin)
     ifeq ($(UNAME_P),x86_64)
-        ASFLAGS += -f macho32
+        ASFLAGS += -f macho64
     endif
     ifneq ($(filter %86,$(UNAME_P)),)
-        ASFLAGS += -f macho64
+        ASFLAGS += -f macho32
     endif
 endif
 
