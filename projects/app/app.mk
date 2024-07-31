@@ -52,10 +52,10 @@ endif
 
 ifeq ($(UNAME_S),Linux)
 	ifeq ($(UNAME_P),x86_64)
-		ASFLAGS += -f elf32
+		ASFLAGS += -f elf64
 	endif
 	ifneq ($(filter %86,$(UNAME_P)),)
-		ASFLAGS += -f elf64
+		ASFLAGS += -f elf32
 	endif
 endif
 
