@@ -17,23 +17,22 @@ pipx install compiledb
 #### Windows
 
 1. Download and install MSYS2: [link](https://github.com/msys2/msys2-installer/releases/latest)
-2. Run the following command(s) with `MSYS2 MinGW Clang x64`:
+2. Run the following command(s) within `MSYS2 CLANG64`:
 
 ```sh
-pacman -S mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-clang-tools-extra  mingw-w64-clang-x86_64-make mingw-w64-clang-x86_64-nasm mingw-w64-clang-x86_64-python-pip
-pip install compiledb
+pacman -S mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-clang-tools-extra mingw-w64-clang-x86_64-make mingw-w64-clang-x86_64-nasm mingw-w64-clang-x86_64-python-pipx
+pipx ensurepath
+pipx install compiledb
 ```
 
-3. Add symbolic link to `make`:
+3. Run the following command(s) within `cmd`:
 
 ```cmd
+:: Add symbolic link to 'make'
 cd C:\msys64\clang64\bin
 mklink make C:\msys64\clang64\bin\mingw32-make.exe
-```
 
-4. Add `clangd` to PATH:
-
-```cmd
+:: Add 'clangd' to PATH
 setx /M PATH "%PATH%;C:\msys64\clang64\bin\"
 ```
 
