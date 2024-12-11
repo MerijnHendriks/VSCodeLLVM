@@ -48,7 +48,7 @@
 			{
 				"label": "CompileDB: Generate",
 				"type": "shell",
-				"command": "mkdir -p .cache/clangd/ && make -Bnwk debug | compiledb -o- > .cache/clangd/compile_commands.json"
+				"command": "mkdir -p .cache/clangd/ && make -Bnwk debug | pipx run compiledb -o- > .cache/clangd/compile_commands.json"
 			},
 			{
 				"label": "Build: Debug",
