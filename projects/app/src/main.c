@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include "../include/ext.h"
 
-extern int foo(void);
+extern int32_t foo(void);
 
-int main(void)
+int32_t main(void)
 {
     int32_t c = add(1, 2);
     int32_t d = foo();
