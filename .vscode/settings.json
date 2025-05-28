@@ -1,0 +1,18 @@
+{
+    "terminal.integrated.defaultProfile.windows": "MSYS2",
+    "terminal.integrated.profiles.windows": {
+        "MSYS2": {
+            "overrideName": true,
+            "path": "C:\\msys64\\usr\\bin\\bash.exe",
+            "args": ["--login", "-i"],
+            "env": { 
+                "MSYSTEM": "CLANG64", 
+                "CHERE_INVOKING": "1"
+            }
+        }
+    },
+    "clangd.arguments": [
+        "-background-index",
+        "-compile-commands-dir=.cache/clangd"
+    ]
+}
