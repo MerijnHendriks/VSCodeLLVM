@@ -9,7 +9,7 @@
         {
             "label": "Make: Debug",
             "type": "shell",
-            "command": "make debug"
+            "command": "make debug",
         },
         {
             "label": "Make: Release",
@@ -19,19 +19,29 @@
         {
             "label": "CompileDB: Generate",
             "type": "shell",
-            "command": "mkdir -p .cache/clangd/ && make -Bnwk debug | pipx run compiledb -o- > .cache/clangd/compile_commands.json"
+            "command": "mkdir -p .cache/clangd/ && make -Bnwk debug | pipx run compiledb -o- > .cache/clangd/compile_commands.json",
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
         },
         {
             "label": "Build: Debug",
             "group": "build",
             "dependsOrder": "sequence",
-            "dependsOn": [ "Make: Clean", "CompileDB: Generate", "Make: Debug" ]
+            "dependsOn": [
+                "Make: Clean",
+                "CompileDB: Generate",
+                "Make: Debug"
+            ]
         },
         {
             "label": "Build: Release",
             "group": "build",
             "dependsOrder": "sequence",
-            "dependsOn": [ "Make: Clean", "Make: Release" ]
+            "dependsOn": [
+                "Make: Clean",
+                "Make: Release"
+            ]
         }
     ]
 }
