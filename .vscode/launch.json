@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "name": "Debug: App",
+            "type": "lldb-dap",
+            "request": "launch",
+            "program": "${workspaceRoot}/app/bin/app.exe",
+            "cwd": "${workspaceRoot}/app/bin/",
+            "preLaunchTask": "Build: Debug"
+        }
+    ]
+}
