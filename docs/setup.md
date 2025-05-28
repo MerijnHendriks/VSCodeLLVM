@@ -41,8 +41,9 @@ setx /M PATH "%PATH%;C:\msys64\clang64\bin\"
 1. Download and install VSCode: [link](https://code.visualstudio.com/download)
 2. Download and install the following VSCode extensions:
     - clangd: [link](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd)
-3. Open `solution.code-workspace` in VSCode, allow workspace to change settings
-4. VSCode > Terminal > Run Task... > CompileDB: Generate
+3. VSCode > Extensions > clangd > Settings > Path > `C:\msys64\clang64\bin\clangd.exe`
+4. Open `solution.code-workspace` in VSCode, allow workspace to change settings
+5. VSCode > Terminal > Run Task... > CompileDB: Generate
 
 ### FAQ
 
