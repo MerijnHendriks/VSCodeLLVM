@@ -18,10 +18,10 @@ AS					:= nasm
 
 # flags
 LIBRARIES			:= m
-BASE_FLAGS			:= -fno-common -fdata-sections -ffunction-sections -Werror -WCL4 -Wanon-enum-enum-conversion -Wbinary-literal -Wbind-to-temporary-copy -Wpedantic -Wdeprecated -Wnon-gcc -Wshadow-all -Wunreachable-code-aggressive -Wformat=2 -Wvla -Warray-bounds-pointer-arithmetic -Wassign-enum -Wbad-function-cast -Wcast-align -Wcast-qual -Wcomma -Wconditional-uninitialized -Wdouble-promotion -Wfloat-equal -Wformat-type-confusion -Wmissing-prototypes -Wnewline-eof -Wpacked -Wpointer-arith -Wshift-sign-overflow -Wstrict-prototypes -Wswitch-enum -Wtautological-constant-in-range-compare -Wthread-safety -Wundef -Wvariadic-macros -Wwritable-strings -Walloca
-CFLAGS				:= $(BASE_FLAGS) -std=c99
-CXXFLAGS			:= $(BASE_FLAGS) -std=c++03 -fno-exceptions -fno-rtti -Wc++-compat -Wc++11-compat -Wnon-virtual-dtor -Wold-style-cast
-LDFLAGS				:= -fuse-ld=lld -Wl,--gc-sections -Wl,--as-needed -Wl,--no-undefined
+BASE_FLAGS			:= -fno-common -fdata-sections -ffunction-sections -Werror -Wall -Walloca -Wanon-enum-enum-conversion -Warray-bounds-pointer-arithmetic -Wassign-enum -Wcast-align  -Wcast-qual -Wcomma -Wcast-function-type -Wcompound-token-split -Wconditional-uninitialized -Wdeprecated -Wdocumentation -Wdouble-promotion -Wextra -Wextra-semi -Wextra-semi-stmt -Wfloat-equal -Wformat-type-confusion -Wmissing-prototypes -Wnewline-eof -Wnon-gcc -Wpacked -Wpedantic -Wpointer-arith -Wshadow-all -Wshift-sign-overflow -Wswitch-enum -Wtautological-compare -Wtautological-constant-in-range-compare -Wthread-safety -Wundef -Wunreachable-code-aggressive -Wvariadic-macros -Wvla -Wzero-as-null-pointer-constant -Wzero-length-array
+CFLAGS				:= $(BASE_FLAGS) -std=c99 -Wc11-extensions -Wc23-compat -Wc23-extensions
+CXXFLAGS			:= $(BASE_FLAGS) -std=c++03 -fno-exceptions -fno-rtti -Wc++-compat -Wc++11-extensions -Wc++14-extensions -Wc++17-extensions -Wc++20-extensions -Wc++20-extensions -Wc++23-extensions -Wc++26-extensions -Wc++98-compat-pedantic -Wclass-varargs -Wdynamic-exception-spec -Wnon-virtual-dtor -Wold-style-cast
+LDFLAGS				:= -fuse-ld=lld -Wl,--as-needed -Wl,--gc-sections -Wl,--no-undefined
 ASFLAGS				:=
 
 # debug
