@@ -1,5 +1,13 @@
 # Technical
 
+## Tools
+
+**Tool**           | **Version**
+------------------ | -----------
+Make               | 4.4.0
+LLVM               | 20.0.0
+Visual Studio Code | 1.96.0
+
 ## Setup
 
 ### 1. Packages
@@ -37,7 +45,7 @@ pipx install compiledb
 
 3. Run the following command(s) within `cmd`:
 
-```cmd
+```bat
 :: Add symbolic link to 'make'
 cd C:\msys64\clang64\bin
 mklink make C:\msys64\clang64\bin\mingw32-make.exe
@@ -61,22 +69,14 @@ If you use Windows, also do the following:
 2. VSCode > Extensions > lldb-dap > Settings > Path >
    `C:\msys64\clang64\bin\lldb-dap.exe`
 
-### Frequently Asked Questions
-
-#### I don't have MSYS2 as terminal in VSCode
-
-Copy-paste the terminal profile from `.vscode/settings.json` into the vscode
-user profile settings.
-
 ## Project: App
 
 ### Flags
 
-This document lists all flags enabled (implicitly) in this project.
-It does not list flags enabled by default in Clang 20.0.0 unless another flag
-controls it.
-
 #### Enabled
+
+It does not list flags enabled by default in clang 20.0.0 or those controlled
+by parent flags.
 
 **Flag**                                   | **Languages** | **Link**
 ------------------------------------------ | ------------- | -----------------------------------------------------------------------------------------------------
@@ -154,8 +154,7 @@ controls it.
 
 ### Skipped
 
-- All flags marked as "enabled by default"
-- Unused features by this project:
+The following were not included:
 
 **Flag**                        | **Reason**
 ------------------------------- | --------------------
@@ -174,7 +173,7 @@ controls it.
 `-Wdocumentation`               | External annotation
 `-Wdocumentation-pedantic`      | External annotation
 
-### Frequently Asked Questions
+## Frequently Asked Questions
 
 #### Why are RTTI and exceptions disabled?
 
