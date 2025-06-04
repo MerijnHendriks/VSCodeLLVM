@@ -57,10 +57,9 @@ setx /M PATH "%PATH%;C:\msys64\clang64\bin\"
 ### 2. Visual Studio Code
 
 1. Download and install VSCode: [link](https://code.visualstudio.com/download)
-2. Download and install the following VSCode extensions:
+2. Install the workspace recommended extensions:
     - clangd: [link](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd)
     - lldb-dap: [link](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.lldb-dap)
-3. VSCode > Terminal > Run Task... > CompileDB: Generate
 
 If you use Windows, also do the following:
 
