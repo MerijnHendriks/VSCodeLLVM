@@ -17,9 +17,9 @@
             "command": "make release"
         },
         {
-            "label": "CompileDB: Generate",
+            "label": "Make: CompileDB",
             "type": "shell",
-            "command": "mkdir -p .cache/clangd/ && make -Bnwk debug | pipx run compiledb -o- > .cache/clangd/compile_commands.json",
+            "command": "make generate-compiledb",
             "runOptions": {
                 "runOn": "folderOpen"
             }
@@ -30,7 +30,7 @@
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Make: Clean",
-                "CompileDB: Generate",
+                "Make: CompileDB",
                 "Make: Debug"
             ]
         },
