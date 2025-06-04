@@ -1,20 +1,19 @@
 # VSCodeLLVM project template
 
-VSCode C(++) LLVM project template
+VSCode C(++) LLVM project template.
 
 ## Goal
 
 To provide a solid cross-platform project template;
 
-- Use the same tools everywhere
-- Share most configurations on all platforms
-- Consistent behaviour on all platforms (except stdlibs)
+- Use the same toolchain on all platforms
+- Consistent behaviour on all platforms
 - Strict by default
 - Bare minimum feature set
 
 ## Setup
 
-See `docs.md` for more information
+See `docs.md` for more information.
 
 ## Build
 

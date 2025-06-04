@@ -174,23 +174,21 @@ The following were not included:
 
 ## Frequently Asked Questions
 
-#### Why are RTTI and exceptions disabled?
+> Q: Why are RTTI and exceptions disabled?
 
-I want C++ to behave as C with classes and limit features to increase
-portability and avoid suprises.
+A: I want C++ to mostly behave as C with classes.
 
-#### Why did you choose the specific language standards?
+> Q: Why did you choose the specific language standards?
 
-I think that C99 and C++03 are the closest match in terms of features.
+A:  C99 and C++03 seem to match the closest in terms of features.
 
-#### Why is the project not hardened by default?
+> Q: Why is the project not hardened by default?
 
-I assume this project to be more useful for embedded development than desktop
-application development. There are already many great projects out there to
-help with the latter.
+A: There is so much to configure for that and also quite platform dependent,
+I can't keep up with it.
 
-#### Why `llvm-mc` instead of `nasm`?
+> Q: Why `llvm-mc` instead of `nasm`?
 
-Simplicity, `llvm-mc` is used internally for inline assembly and it's already
-included with the llvm toolchain. `nasm` only supports x86 whereas `llvm-mc`
-also supports arm and risc-v platforms.
+A: Simplicity, portability. `llvm-mc` is used internally for inline assembly
+and it's already included with the llvm toolchain. `nasm` only supports x86
+whereas `llvm-mc` also supports arm and risc-v platforms.
