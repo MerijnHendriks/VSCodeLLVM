@@ -9,7 +9,7 @@
         {
             "label": "Make: Debug",
             "type": "shell",
-            "command": "make debug",
+            "command": "make debug"
         },
         {
             "label": "Make: Release",
