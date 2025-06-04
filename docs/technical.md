@@ -1,12 +1,82 @@
 # Technical
 
-## Flags
+## Setup
+
+### 1. Packages
+
+#### Ubuntu
+
+1. Run the following command(s) in the terminal:
+
+```sh
+# download apt packages
+sudo apt update
+sudo apt install --no-install-recommends llvm lld lldb clang clang-format clang-tidy clangd make
+
+# download python packages
+sudo apt install --no-install-recommends pipx
+pipx ensurepath
+pipx install compiledb
+```
+
+#### Windows
+
+1. Download and install MSYS2: [link](https://github.com/msys2/msys2-installer/releases)
+2. Run the following command(s) within `MSYS2 CLANG64`:
+
+```sh
+# download aur packages
+pacman -Syu
+pacman -S mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-lldb mingw-w64-clang-x86_64-clang-tools-extra mingw-w64-clang-x86_64-make
+
+# download python packages
+pacman -S mingw-w64-clang-x86_64-python-pipx
+pipx ensurepath
+pipx install compiledb
+```
+
+3. Run the following command(s) within `cmd`:
+
+```cmd
+:: Add symbolic link to 'make'
+cd C:\msys64\clang64\bin
+mklink make C:\msys64\clang64\bin\mingw32-make.exe
+
+:: Add 'clangd' to PATH
+setx /M PATH "%PATH%;C:\msys64\clang64\bin\"
+```
+
+### 2. Visual Studio Code
+
+1. Download and install VSCode: [link](https://code.visualstudio.com/download)
+2. Download and install the following VSCode extensions:
+    - clangd: [link](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd)
+    - lldb-dap: [link](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.lldb-dap)
+3. VSCode > Terminal > Run Task... > CompileDB: Generate
+
+If you use Windows, also do the following:
+
+1. VSCode > Extensions > clangd > Settings > Path >
+   `C:\msys64\clang64\bin\clangd.exe`
+2. VSCode > Extensions > lldb-dap > Settings > Path >
+   `C:\msys64\clang64\bin\lldb-dap.exe`
+
+### Frequently Asked Questions
+
+#### I don't have MSYS2 as terminal in VSCode
+
+Copy-paste the terminal profile from `.vscode/settings.json` into the vscode
+user profile settings.
+
+## Project: App
+
+### Flags
 
 This document lists all flags enabled (implicitly) in this project.
 It does not list flags enabled by default in Clang 20.0.0 unless another flag
 controls it.
 
-### Enabled
+#### Enabled
 
 **Flag**                                   | **Languages** | **Link**
 ------------------------------------------ | ------------- | -----------------------------------------------------------------------------------------------------
@@ -52,7 +122,8 @@ controls it.
 `-Wcovered-switch-default`                 | C / C++       | [link](https://clang.llvm.org/docs/DiagnosticsReference.html#wcovered-switch-default)
 `-Wdate-time`                              | C / C++       | [link](https://clang.llvm.org/docs/DiagnosticsReference.html#wdate-time)
 `-Wdeprecated`                             | C / C++       | [link](https://clang.llvm.org/docs/DiagnosticsReference.html#wdeprecated)
-`-Wdocumentation`                          | C / C++       | [link](https://clang.llvm.org/docs/DiagnosticsReference.html#wdocumentation)
+`-Wdisabled-macro-expansion`               | C / C++       | [link](https://clang.llvm.org/docs/DiagnosticsReference.htmlw#wdisabled-macro-expansion)
+`-Wdtor-name`                              | C++           | [link](https://clang.llvm.org/docs/DiagnosticsReference.htmlw#wdtor-name)
 `-Wdouble-promotion`                       | C / C++       | [link](https://clang.llvm.org/docs/DiagnosticsReference.html#wdouble-promotion)
 `-Wdynamic-exception-spec`                 | C++           | [link](https://clang.llvm.org/docs/DiagnosticsReference.html#wdynamic-exception-spec)
 `-Wextra`                                  | C / C++       | [link](https://clang.llvm.org/docs/DiagnosticsReference.html#wextra)
@@ -86,31 +157,42 @@ controls it.
 - All flags marked as "enabled by default"
 - Unused features by this project:
 
-**Flag**                     | **Reason**
----------------------------- | -----------------
-`-Warc-repeated-use-of-weak` | Obj-C only
-`-Watomic-implicit-seq-cst`  | C11 feature
-`-Watomic-properties`        | C11 feature
-`-Wcalled-once-parameter`    | Clang annotation
-`-Wcompletion-handler`       | Swift only
-`-Wconsumed`                 | Clang annotation
-`-Wcstring-format-directive` | Obj-C only
-`-Wctad-maybe-unsupported`   | C++17 feature
-`-Wcuda-compat`              | CUDA only
+**Flag**                        | **Reason**
+------------------------------- | --------------------
+`-Warc-repeated-use-of-weak`    | Obj-C only
+`-Watomic-implicit-seq-cst`     | C11 feature
+`-Watomic-properties`           | C11 feature
+`-Wcalled-once-parameter`       | Clang annotation
+`-Wcompletion-handler`          | Swift only
+`-Wconsumed`                    | Clang annotation
+`-Wcstring-format-directive`    | Obj-C only
+`-Wctad-maybe-unsupported`      | C++17 feature
+`-Wcuda-compat`                 | CUDA only
+`-Wdeclaration-after-statement` | C89 only
+`-Wdecls-in-multiple-modules`   | C++20 feature
+`-Wdeprecated-implementations`  | Clang annotation
+`-Wdocumentation`               | External annotation
+`-Wdocumentation-pedantic`      | External annotation
 
-## Frequently Asked Questions
+### Frequently Asked Questions
 
-### Why are RTTI and exceptions disabled?
+#### Why are RTTI and exceptions disabled?
 
 I want C++ to behave as C with classes and limit features to increase
 portability and avoid suprises.
 
-### Why did you choose the specific language standards?
+#### Why did you choose the specific language standards?
 
 I think that C99 and C++03 are the closest match in terms of features.
 
-### Why is the project not hardened by default?
+#### Why is the project not hardened by default?
 
 I assume this project to be more useful for embedded development than desktop
 application development. There are already many great projects out there to
 help with the latter.
+
+#### Why `llvm-mc` instead of `nasm`?
+
+Simplicity, `llvm-mc` is used internally for inline assembly and it's already
+included with the llvm toolchain. `nasm` only supports x86 whereas `llvm-mc`
+also supports arm and risc-v platforms.
