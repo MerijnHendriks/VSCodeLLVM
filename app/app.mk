@@ -21,8 +21,8 @@ LIBRARIES			:= m
 BASE_FLAGS			:= -fno-common -fdata-sections -ffunction-sections -Werror -Wall -Walloca -Wanon-enum-enum-conversion -Warray-bounds-pointer-arithmetic -Wasm-operand-widths -Wassign-enum -Wbad-function-cast -Wcast-align -Wcast-function-type -Wcast-qual -Wcomma -Wcompound-token-split -Wconditional-uninitialized -Wcovered-switch-default -Wdate-time -Wdeprecated -Wdisabled-macro-expansion -Wdouble-promotion -Wextra -Wextra-semi -Wextra-semi-stmt -Wfloat-equal -Wformat-type-confusion -Wmissing-prototypes -Wnewline-eof -Wnon-gcc -Wpacked -Wpedantic -Wpointer-arith -Wshadow-all -Wshift-sign-overflow -Wswitch-enum -Wtautological-compare -Wtautological-constant-in-range-compare -Wthread-safety -Wundef -Wunreachable-code-aggressive -Wvariadic-macros -Wvla -Wzero-as-null-pointer-constant -Wzero-length-array
 CFLAGS				:= $(BASE_FLAGS) -std=c99 -Wc11-extensions -Wc23-compat -Wc23-extensions
 CXXFLAGS			:= $(BASE_FLAGS) -std=c++03 -fno-exceptions -fno-rtti -Wabstract-vbase-init -Wbind-to-temporary-copy -Wc++-compat -Wc++11-extensions -Wc++14-extensions -Wc++17-extensions -Wc++20-extensions -Wc++20-extensions -Wc++23-extensions -Wc++26-extensions -Wc++98-compat-pedantic -Wclass-varargs -Wdtor-name -Wdynamic-exception-spec -Wnon-virtual-dtor -Wold-style-cast
-LDFLAGS				:= -fuse-ld=lld -Wl,--as-needed -Wl,--gc-sections -Wl,--no-undefined
 ASFLAGS				:= -filetype=obj
+LDFLAGS				:= -fuse-ld=lld -Wl,--as-needed -Wl,--gc-sections -Wl,--no-undefined
 
 # debug
 debug: CFLAGS		+= -DDEBUG -g -fstack-usage -Wno-unused
@@ -76,7 +76,10 @@ endif
 # get objects to generate
 BIN_FOLDER		:= bin
 OBJ_FOLDER		:= obj
-SOURCES			:= $(shell find $(SOURCES_FOLDER) -name '*.s' -or -name '*.c' -or -name '*.cpp')
+CSOURCES		:= $(shell find $(SOURCES_FOLDER) -name '*.c')
+CXXSOURCES		:= $(shell find $(SOURCES_FOLDER) -name '*.cpp')
+ASSOURCES		:= $(shell find $(SOURCES_FOLDER) -name '*.s')
+SOURCES			:= $(CSOURCES) $(CXXSOURCES) $(ASSOURCES)
 OBJECTS			:= $(SOURCES:%=$(OBJ_FOLDER)/%.o)
 
 # add object dependencies
