@@ -1,6 +1,8 @@
+# AT&T dialect
+
     .text
     .globl foo
 
 foo:
-    movl $7, %eax   # comment
+    movl $7, %eax
     ret
