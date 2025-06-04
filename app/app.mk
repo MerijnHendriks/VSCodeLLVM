@@ -14,7 +14,7 @@ LIBRARY_FOLDERS		:=
 # tools
 CC					:= clang
 CXX					:= clang++
-AS					:= nasm
+AS					:= llvm-mc
 
 # flags
 LIBRARIES			:= m
@@ -22,16 +22,18 @@ BASE_FLAGS			:= -fno-common -fdata-sections -ffunction-sections -Werror -Wall -W
 CFLAGS				:= $(BASE_FLAGS) -std=c99 -Wc11-extensions -Wc23-compat -Wc23-extensions
 CXXFLAGS			:= $(BASE_FLAGS) -std=c++03 -fno-exceptions -fno-rtti -Wabstract-vbase-init -Wbind-to-temporary-copy -Wc++-compat -Wc++11-extensions -Wc++14-extensions -Wc++17-extensions -Wc++20-extensions -Wc++20-extensions -Wc++23-extensions -Wc++26-extensions -Wc++98-compat-pedantic -Wclass-varargs -Wdynamic-exception-spec -Wnon-virtual-dtor -Wold-style-cast
 LDFLAGS				:= -fuse-ld=lld -Wl,--as-needed -Wl,--gc-sections -Wl,--no-undefined
-ASFLAGS				:=
+ASFLAGS				:= -filetype=obj
 
 # debug
 debug: CFLAGS		+= -DDEBUG -g -fstack-usage -Wno-unused
 debug: CXXFLAGS		+= -DDEBUG -g -fstack-usage -Wno-unused
+debug: ASFLAGS      += -g --preserve-comments
 debug: LDFLAGS		+= -fstack-usage
 
 # release
 release: CFLAGS		+= -DNDEBUG -Os -flto=full
 release: CXXFLAGS	+= -DNDEBUG -Os -flto=full
+release: ASFLAGS    +=
 release: LDFLAGS	+= -flto=full
 
 # -----------------------------------------------------------------------------
@@ -45,29 +47,29 @@ UNAME_P := $(shell uname -p)
 ifeq ($(OS),Windows_NT)
 	ifeq ($(PROCESSOR_ARCHITECTURE),AMD64)
     	INCLUDE_FOLDERS += C:/msys64/clang64/include
-     	ASFLAGS += -f win64
+     	ASFLAGS += --arch=x86-64
     endif
     ifeq ($(PROCESSOR_ARCHITECTURE),x86)
     	INCLUDE_FOLDERS += C:/msys64/clang32/include
-     	ASFLAGS += -f win32
+     	ASFLAGS += --arch=x86
       endif
 endif
 
 ifeq ($(UNAME_S),Linux)
 	ifeq ($(UNAME_P),x86_64)
-	   ASFLAGS += -f elf64
+	   ASFLAGS += --arch=x86-64
 	endif
 	ifneq ($(filter %86,$(UNAME_P)),)
-	   ASFLAGS += -f elf32
+	   ASFLAGS += --arch=x86
 	endif
 endif
 
 ifeq ($(UNAME_S),Darwin)
 	ifeq ($(UNAME_P),x86_64)
-	   ASFLAGS += -f macho64
+	   ASFLAGS += --arch=x86-64
 	endif
 	ifneq ($(filter %86,$(UNAME_P)),)
-	   ASFLAGS += -f macho32
+	   ASFLAGS += --arch=x86
 	endif
 endif
 

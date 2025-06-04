@@ -1,6 +1,6 @@
-global foo
-section .text
+    .text
+    .globl foo
+
 foo:
-;   mov eax, 7  ; x86
-    mov rax, 7  ; x86_64
+    movl $7, %eax   # comment
     ret

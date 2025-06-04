@@ -11,7 +11,7 @@
 ```sh
 # download apt packages
 sudo apt update
-sudo apt install --no-install-recommends llvm lld lldb clang clang-format clang-tidy clangd nasm make
+sudo apt install --no-install-recommends llvm lld lldb clang clang-format clang-tidy clangd make
 
 # download python packages
 sudo apt install --no-install-recommends pipx
@@ -27,7 +27,7 @@ pipx install compiledb
 ```sh
 # download aur packages
 pacman -Syu
-pacman -S mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-lldb mingw-w64-clang-x86_64-clang-tools-extra mingw-w64-clang-x86_64-nasm mingw-w64-clang-x86_64-make
+pacman -S mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-lldb mingw-w64-clang-x86_64-clang-tools-extra mingw-w64-clang-x86_64-make
 
 # download python packages
 pacman -S mingw-w64-clang-x86_64-python-pipx
