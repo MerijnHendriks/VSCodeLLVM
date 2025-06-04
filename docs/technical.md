@@ -1,10 +1,12 @@
-# Flags
+# Technical
+
+## Flags
 
 This document lists all flags enabled (implicitly) in this project.
 It does not list flags enabled by default in Clang 20.0.0 unless another flag
 controls it.
 
-## Set
+### Enabled
 
 **Flag**                                   | **Languages** | **Link**
 ------------------------------------------ | ------------- | -----------------------------------------------------------------------------------------------------
@@ -79,7 +81,7 @@ controls it.
 `-Wzero-as-null-pointer-constant`          | C / C++       | [link](https://clang.llvm.org/docs/DiagnosticsReference.html#wzero-as-null-pointer-constant)
 `-Wzero-length-array`                      | C / C++       | [link](https://clang.llvm.org/docs/DiagnosticsReference.html#wzero-length-array)
 
-## Skipped
+### Skipped
 
 - All flags marked as "enabled by default"
 - Unused features by this project:
@@ -95,3 +97,20 @@ controls it.
 `-Wcstring-format-directive` | Obj-C only
 `-Wctad-maybe-unsupported`   | C++17 feature
 `-Wcuda-compat`              | CUDA only
+
+## Frequently Asked Questions
+
+### Why are RTTI and exceptions disabled?
+
+I want C++ to behave as C with classes and limit features to increase
+portability and avoid suprises.
+
+### Why did you choose the specific language standards?
+
+I think that C99 and C++03 are the closest match in terms of features.
+
+### Why is the project not hardened by default?
+
+I assume this project to be more useful for embedded development than desktop
+application development. There are already many great projects out there to
+help with the latter.
