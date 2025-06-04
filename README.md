@@ -16,13 +16,13 @@ To provide a solid cross-platform project template;
 
 **Tool**           | **Version**
 ------------------ | -----------
-Make               | 4.3
-LLVM               | 14.0.3
-Visual Studio Code | 1.70
+Make               | 4.4.0
+LLVM               | 20.0.0
+Visual Studio Code | 1.96.0
 
 ## Setup
 
-See `docs/` for more information
+See `docs.md` for more information
 
 ## Build
 
