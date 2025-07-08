@@ -49,15 +49,15 @@ python -m venv .venv
 .venv/bin/python -m pip install compiledb
 ```
 
-3. Run the following command(s) within `cmd`:
+3. Run the following commands in Powershell with "Run as Administrator":
 
-```bat
-:: Add symbolic link to 'make'
+```ps1
+# Add symbolic link to 'make'
 cd C:\msys64\clang64\bin
-mklink make C:\msys64\clang64\bin\mingw32-make.exe
+New-Item -Force -ItemType SymbolicLink -Path "make" -Target "C:\msys64\clang64\bin\mingw32-make.exe"
 
-:: Add 'clangd' to PATH
-setx /M PATH "%PATH%;C:\msys64\clang64\bin\"
+# Add clang executables to PATH
+[Environment]::SetEnvironmentVariable("PATH", $env:PATH + ";C:\msys64\clang64\bin\", "Machine")
 ```
 
 ### 2. Visual Studio Code
