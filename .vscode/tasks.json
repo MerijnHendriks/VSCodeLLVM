@@ -42,6 +42,20 @@
                 "Make: Clean",
                 "Make: Release"
             ]
-        }
+        },
+        {
+            "label": "Python: Create virtual environment",
+            "type": "shell",
+            "command": "python -m venv .cache/venv"
+        },
+        {
+            "label": "Python: Install CompileDB",
+            "type": "shell",
+            "command": ".cache/venv/bin/python -m pip install compiledb",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Python: Create virtual environment",
+            ]
+        },
     ]
 }

@@ -20,14 +20,6 @@ Visual Studio Code | 1.96.0
 # download apt packages
 sudo apt update
 sudo apt install --no-install-recommends llvm lld lldb clang clang-format clang-tidy clangd make python3-pip
-
-# setup python venv
-cd path/to/vscodellvm
-python -m venv .venv
-.venv/bin/activate
-
-# install python packages
-.venv/bin/python -m pip install compiledb
 ```
 
 #### Windows
@@ -39,14 +31,6 @@ python -m venv .venv
 # install aur packages
 pacman -Syu
 pacman -S mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-lldb mingw-w64-clang-x86_64-clang-tools-extra mingw-w64-clang-x86_64-make mingw-w64-clang-x86_64-python-pip
-
-# setup python venv
-cd path/to/vscodellvm
-python -m venv .venv
-.venv/bin/activate
-
-# install python packages
-.venv/bin/python -m pip install compiledb
 ```
 
 3. Run the following commands in Powershell with "Run as Administrator":
@@ -56,7 +40,7 @@ python -m venv .venv
 cd C:\msys64\clang64\bin
 New-Item -Force -ItemType SymbolicLink -Path "make" -Target "C:\msys64\clang64\bin\mingw32-make.exe"
 
-# Add clang executables to PATH
+# Add clang64 environment executables to PATH
 [Environment]::SetEnvironmentVariable("PATH", $env:PATH + ";C:\msys64\clang64\bin\", "Machine")
 ```
 
@@ -66,13 +50,9 @@ New-Item -Force -ItemType SymbolicLink -Path "make" -Target "C:\msys64\clang64\b
 2. Install the workspace recommended extensions:
     - clangd: [link](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd)
     - lldb-dap: [link](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.lldb-dap)
-
-If you use Windows, also do the following:
-
-1. VSCode > Extensions > clangd > Settings > Path >
-   `C:\msys64\clang64\bin\clangd.exe`
-2. VSCode > Extensions > lldb-dap > Settings > Path >
-   `C:\msys64\clang64\bin\lldb-dap.exe`
+3. VSCode > File Explorer > Clone Repository > https://github.com/merijnhendriks/vscodellvm
+4. Open `VSCodeLLVM` folder in VSCode
+5. VSCode > Terminal > Run Task... > Python: Install CompileDB
 
 ## Project: App
 

@@ -31,10 +31,10 @@ debug: ASFLAGS      += -g --preserve-comments
 debug: LDFLAGS		+= -fstack-usage
 
 # release
-release: CFLAGS		+= -DNDEBUG -Os -flto=full
-release: CXXFLAGS	+= -DNDEBUG -Os -flto=full
+release: CFLAGS		+= -DNDEBUG -Os -flto=thin
+release: CXXFLAGS	+= -DNDEBUG -Os -flto=thin
 release: ASFLAGS    +=
-release: LDFLAGS	+= -flto=full
+release: LDFLAGS	+= -flto=thin -Wl,--thinlto-cache-dir=../.cache/app/lto
 
 # -----------------------------------------------------------------------------
 # DO NOT CHANGE ANYTHING BELOW THIS
@@ -75,7 +75,7 @@ endif
 
 # get objects to generate
 BIN_FOLDER		:= bin
-OBJ_FOLDER		:= obj
+OBJ_FOLDER		:= ../.cache/$(PROJECT_NAME)/obj
 CSOURCES		:= $(shell find $(SOURCES_FOLDER) -name '*.c')
 CXXSOURCES		:= $(shell find $(SOURCES_FOLDER) -name '*.cpp')
 ASSOURCES		:= $(shell find $(SOURCES_FOLDER) -name '*.s')
@@ -120,5 +120,5 @@ debug: $(BIN_FOLDER)/$(PROJECT_NAME)
 release: $(BIN_FOLDER)/$(PROJECT_NAME)
 
 clean:
-	rm -rf $(OBJ_FOLDER)
+	rm -rf ../.cache/$(PROJECT_NAME)
 	rm -rf $(BIN_FOLDER)
