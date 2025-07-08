@@ -5,6 +5,7 @@ release:
 	@$(MAKE) -C app -f app.mk release
 
 clean:
+	rm -rf .cache/clangd
 	@$(MAKE) -C app -f app.mk clean
 
 generate-compiledb:
