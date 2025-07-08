@@ -34,7 +34,7 @@ debug: LDFLAGS		+= -fstack-usage
 release: CFLAGS		+= -DNDEBUG -Os -flto=thin
 release: CXXFLAGS	+= -DNDEBUG -Os -flto=thin
 release: ASFLAGS    +=
-release: LDFLAGS	+= -flto=thin -Wl,--thinlto-cache-dir=../.cache/app/lto
+release: LDFLAGS	+= -flto=thin -Wl,--thinlto-jobs=0 -Wl,--thinlto-cache-dir=../.cache/app/lto
 
 # -----------------------------------------------------------------------------
 # DO NOT CHANGE ANYTHING BELOW THIS
