@@ -19,12 +19,15 @@ Visual Studio Code | 1.96.0
 ```sh
 # download apt packages
 sudo apt update
-sudo apt install --no-install-recommends llvm lld lldb clang clang-format clang-tidy clangd make
+sudo apt install --no-install-recommends llvm lld lldb clang clang-format clang-tidy clangd make python3-pip
 
-# download python packages
-sudo apt install --no-install-recommends pipx
-pipx ensurepath
-pipx install compiledb
+# setup python venv
+cd path/to/vscodellvm
+python -m venv .venv
+.venv/bin/activate
+
+# install python packages
+.venv/bin/python -m pip install compiledb
 ```
 
 #### Windows
@@ -33,14 +36,17 @@ pipx install compiledb
 2. Run the following command(s) within `MSYS2 CLANG64`:
 
 ```sh
-# download aur packages
+# install aur packages
 pacman -Syu
-pacman -S mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-lldb mingw-w64-clang-x86_64-clang-tools-extra mingw-w64-clang-x86_64-make
+pacman -S mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-lldb mingw-w64-clang-x86_64-clang-tools-extra mingw-w64-clang-x86_64-make mingw-w64-clang-x86_64-python-pip
 
-# download python packages
-pacman -S mingw-w64-clang-x86_64-python-pipx
-pipx ensurepath
-pipx install compiledb
+# setup python venv
+cd path/to/vscodellvm
+python -m venv .venv
+.venv/bin/activate
+
+# install python packages
+.venv/bin/python -m pip install compiledb
 ```
 
 3. Run the following command(s) within `cmd`:

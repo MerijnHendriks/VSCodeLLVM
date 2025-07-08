@@ -10,4 +10,4 @@ clean:
 generate-compiledb:
 	mkdir -p .cache/clangd/
 	@$(MAKE) -Bnwk debug | \
-	pipx run compiledb -o .cache/clangd/compile_commands.json
+	.venv/bin/python -m compiledb -o .cache/clangd/compile_commands.json
