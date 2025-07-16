@@ -1,8 +1,7 @@
-# AT&T dialect
-
-    .text
-    .globl foo
+.intel_syntax noprefix
+.text
+.globl foo
 
 foo:
-    movl $7, %eax
+    mov eax, 7
     ret

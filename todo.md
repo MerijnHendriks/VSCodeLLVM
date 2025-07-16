@@ -2,7 +2,8 @@
 
 - [x] Migrate to `llvm-mc`
 - [ ] Update compile flags to clang 20
-  - Note to self: left off here https://clang.llvm.org/docs/DiagnosticsReference.html#wdtor-typedef
+  - Note to self: left off here https://clang.llvm.org/docs/DiagnosticsReference.html#wexit-time-destructors
+- [ ] Add static library example
 - [ ] Add clang-format support
 - [ ] Add clang-tidy support
 - [ ] Add github CI
